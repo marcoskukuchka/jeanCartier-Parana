@@ -37,7 +37,7 @@ $mensaje = '
                 </p>
 
                 <p style="font-size: 14px; line-height: 1.5;">
-                  En breve nos pondremos en contacto con vos con todos los detalles. Si tenés alguna consulta o querés sumar información adicional, no dudes en escribirnos respondiendo a este correo o escribirnos al WhatsApp <strong><a href="https://wa.me/+5491121670916" target="_blank">+54 9 11 2167-0916</a></strong>.
+                  En breve nos pondremos en contacto con vos con todos los detalles. Si tenés alguna consulta o querés sumar información adicional, no dudes en escribirnos respondiendo a este correo o escribirnos al WhatsApp <strong><a href="https://wa.me/+5491121670916" target="_blank">+54 9 3435 12-6716</a></strong>.
                 </p>
 
                 <p style="font-size: 14px; line-height: 1.5;">
