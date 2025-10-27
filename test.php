@@ -1,7 +1,7 @@
 <?php
 
 require_once './conn/loader.php';
-$sql = "SELECT * FROM vueWebArticulosDisponibilidad WHERE Deposito = 1 AND Stock > 0 ORDER BY Foto ASC, Importe ASC";
+$sql = "SELECT * FROM webClientes";
 $stmt = $dbh->prepare($sql);
 
 $stmt->execute();
