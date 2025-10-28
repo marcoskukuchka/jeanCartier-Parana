@@ -13,7 +13,7 @@ if (!isset($_SESSION['vendedor']) || empty($_SESSION['vendedor'])) {
 
 <head>
     <?php require_once './includes/head.php' ?>
-    <title>Carrito - Jean Cartier Córdoba</title>
+    <title>Carrito - Jean Cartier Paraná</title>
 </head>
 
 <body>
@@ -267,7 +267,7 @@ if (!isset($_SESSION['vendedor']) || empty($_SESSION['vendedor'])) {
                                         <div class="col-sm-6">
                                             <p><strong>Cliente:</strong>
                                                 <?= $_SESSION['vendedor']['Email'] ?? 'No disponible' ?></p>
-                                            <p><strong>Sucursal:</strong> Córdoba</p>
+                                            <p><strong>Sucursal:</strong> Paraná</p>
                                         </div>
                                         <div class="col-sm-6">
                                             <p><strong>Fecha:</strong> <?= date('d/m/Y H:i') ?></p>
@@ -366,7 +366,7 @@ if (!isset($_SESSION['vendedor']) || empty($_SESSION['vendedor'])) {
                                     </div>
                                     <div class="col-6">
                                         <small class="text-muted">Sucursal:</small>
-                                        <p class="mb-1 fs-14">Córdoba</p>
+                                        <p class="mb-1 fs-14">Paraná</p>
                                     </div>
                                     <div class="col-12">
                                         <small class="text-muted">Fecha:</small>
