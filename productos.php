@@ -44,6 +44,8 @@ $productos = array_group_by($productos, 'CodArticulo');
                         <?php
                         //obtengo los modelos y colores de los articulos
                         $variantes = [];
+                        $fotosUnicas = []; // Array para almacenar fotos únicas
+                        
                         foreach ($value as $item) {
                             $variantes[] = [
                                 'modelo' => $item['ModDescripcion'],
@@ -52,6 +54,11 @@ $productos = array_group_by($productos, 'CodArticulo');
                                 'codBarra' => $item['CodBarra'],
                                 'importe' => $item['Importe']
                             ];
+                            
+                            // Agregar foto única si no existe ya
+                            if (!empty($item['Foto']) && !in_array($item['Foto'], $fotosUnicas)) {
+                                $fotosUnicas[] = $item['Foto'];
+                            }
                         }
 
                         // Organizar por modelo y color con stock
@@ -88,10 +95,15 @@ $productos = array_group_by($productos, 'CodArticulo');
                         $productoData = json_encode($resultado);
                         ?>
                         <div class="row border-bottom py-3 align-items-center item row-striped"
-                            data-nombre="<?= $value[0]['Foto'] . " " . $value[0]['ModDescripcion'] . " " . $value[0]['CodArticulo'] . " " . $value[0]['Descripcion'] . " " . $value[0]['DescripCodBarracion'] ?> ">
+                            data-nombre="<?= implode(' ', $fotosUnicas) . " " . $value[0]['ModDescripcion'] . " " . $value[0]['CodArticulo'] . " " . $value[0]['Descripcion'] . " " . $value[0]['DescripCodBarracion'] ?> ">
                             <div class="col-md-1">
                                 <p class="fw-bold d-md-none mb-0">Foto</p>
-                                <p class="mb-0"><?= $value[0]['Foto'] ?></p>
+                                <p class="mb-0">
+                                    <?php 
+                                    // Mostrar todas las fotos únicas separadas por coma
+                                    echo implode(' ', $fotosUnicas);
+                                    ?>
+                                </p>
                             </div>
                             <div class="col-md-2">
                                 <p class="fw-bold d-md-none mb-0">Cod. Artículo</p>
@@ -189,7 +201,7 @@ $productos = array_group_by($productos, 'CodArticulo');
                                         <!-- Campos ocultos para el formulario -->
                                         <input type="hidden" name="CodArticulo" value="<?= $value[0]['CodArticulo'] ?>">
                                         <input type="hidden" name="Descripcion" value="<?= $value[0]['Descripcion'] ?>">
-                                        <input type="hidden" name="Foto" value="<?= $value[0]['Foto'] ?>">
+                                        <input type="hidden" name="Foto" value="<?= implode(', ', $fotosUnicas) ?>">
                                         <input type="hidden" name="ColDescripcion" id="color-seleccionado-<?= $indice ?>">
                                         <input type="hidden" name="CodBarra" id="codbarra-seleccionado-<?= $indice ?>">
                                         <input type="hidden" name="Importe" id="importe-seleccionado-<?= $indice ?>">
