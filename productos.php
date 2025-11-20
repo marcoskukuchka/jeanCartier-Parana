@@ -459,7 +459,7 @@ $productos = array_group_by($productos, 'CodArticulo');
                             mostrarAlerta(response.message, 'success');
 
                             // Limpiar formulario
-                            form[0].reset();
+                            //form[0].reset();
 
                             // Ocultar sección de agregar al carrito
                             $(`#agregar-carrito-${indice}`).hide();
