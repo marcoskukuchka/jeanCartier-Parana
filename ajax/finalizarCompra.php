@@ -406,7 +406,7 @@ try {
   $mail->SMTPSecure = "tls";
   $mail->Port       = 587;
 
-  $mail->setFrom('presupuesto@tiendajeancartierhogar.com.ar', 'Tienda Jean Cartier Hogar');
+  $mail->setFrom('contacto.sistema.web@gmail.com', 'Tienda Jean Cartier Hogar');
 
   // Enviar a la dirección de contacto y al cliente
   $mail->addAddress('jeancartierhogarparana@gmail.com');
