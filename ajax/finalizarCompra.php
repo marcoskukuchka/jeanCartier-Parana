@@ -410,6 +410,7 @@ try {
 
   // Enviar a la dirección de contacto y al cliente
   $mail->addAddress('jeancartierhogarparana@gmail.com');
+  //$mail->addBcc('marcos.kukuchka@gmail.com');
 
 
   $mail->isHTML(true);
