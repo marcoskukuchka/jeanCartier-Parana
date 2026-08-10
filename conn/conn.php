@@ -3,7 +3,8 @@ $dbuser = 'AGSWEB';
 $dbpass = 'AgsWeb2025!';
 try {
 
-    $dsn = "sqlsrv:Server=181.13.218.11, 10028;Database=siv"; //conexion vpn
+    //$dsn = "sqlsrv:Server=181.13.218.11, 10028;Database=siv"; //conexion vpn
+    $dsn = "sqlsrv:Server=26.229.63.28, 10028;Database=siv"; //conexion vpn
 
     $options = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -15,6 +16,7 @@ try {
     header('Location: 404.php?error=db');
 }
 
-$serverName = "181.13.218.11, 10028";
+//$serverName = "181.13.218.11, 10028";conexion vpn
+$serverName = "26.229.63.28, 10028";
 $connectionInfo = array("Database" => "Siv", "UID" => "AGSWEB", "PWD" => "AgsWeb2025!", "ConnectionPooling" => "1");
 $conmsql = sqlsrv_connect($serverName, $connectionInfo);
