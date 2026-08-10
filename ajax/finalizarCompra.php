@@ -181,7 +181,7 @@ LEFT JOIN  vueArticulos  ON vueWebArticulosDisponibilidad .CodArticulo = vueArti
   $insertDetalle['Renglon'] = $x;
   $insertDetalle['CodArticulo'] = $articulo['CodArticulo'];
   $insertDetalle['Cantidad'] = $cantidadTotal;
-  $insertDetalle['ImpUnitario'] = $articulo['Importe'] / (1+($articulo['PorIva'] /100));
+  $insertDetalle['ImpUnitario'] = $articulo['Importe'] / (1 + ($articulo['PorIva'] / 100));
   $insertDetalle['PorIva'] = $articulo['PorIva'];
   $insertDetalle['Lista'] = $_SESSION['vendedor']['ListaPrecio'];
   $insertDetalle['Pendiente'] = $cantidadTotal;
@@ -292,8 +292,15 @@ try {
     $totalGeneral += $subtotal;
     $modelo = isset($value['ModDescripcion']) ? $value['ModDescripcion'] : '-';
     $color = isset($value['ColDescripcion']) ? $value['ColDescripcion'] : '-';
+    $codigoArticulo = '-';
+    if (isset($value['CodArticulo']) && $value['CodArticulo'] !== '') {
+      $codigoArticulo = $value['CodArticulo'];
+    } elseif (isset($value['CodBarra']) && $value['CodBarra'] !== '') {
+      $codigoArticulo = $value['CodBarra'];
+    }
     $productosHTML .= '
         <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #eeeeee;">' . htmlspecialchars($codigoArticulo) . '</td>
             <td style="padding: 10px; border-bottom: 1px solid #eeeeee;">' . htmlspecialchars($value['Descripcion']) . '</td>
             <td style="padding: 10px; border-bottom: 1px solid #eeeeee;">' . htmlspecialchars($modelo) . '</td>
             <td style="padding: 10px; border-bottom: 1px solid #eeeeee;">' . htmlspecialchars($color) . '</td>
@@ -332,6 +339,10 @@ try {
                         <td style="padding: 5px;">' . htmlspecialchars($_SESSION['vendedor']['RazonSocial']) . '</td>
                       </tr>
                       <tr>
+                        <td style="padding: 5px;"><strong>N° Cliente:</strong></td>
+                        <td style="padding: 5px;">' . htmlspecialchars($_SESSION['vendedor']['IdCliente']) . '</td>
+                      </tr>
+                      <tr>
                         <td style="padding: 5px;"><strong>CUIT:</strong></td>
                         <td style="padding: 5px;">' . htmlspecialchars($_SESSION['vendedor']['Cuit']) . '</td>
                       </tr>
@@ -350,6 +361,7 @@ try {
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 10px 0;">
                       <thead>
                         <tr style="background-color: #f0f0f0;">
+                          <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dddddd;">Código</th>
                           <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dddddd;">Producto</th>
                           <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dddddd;">Modelo</th>
                           <th style="padding: 10px; text-align: left; border-bottom: 2px solid #dddddd;">Color</th>
@@ -387,32 +399,24 @@ try {
   $mail = new PHPMailer(true);
   $mail->SMTPDebug = 0; // Cambiar a 0 en producción
   $mail->isSMTP();
-  $mail->Host       = 'mail.tiendajeancartierhogar.com.ar';
+  $mail->Host       = 'smtp.gmail.com';
   $mail->SMTPAuth   = true;
-  $mail->Username   = 'presupuesto@tiendajeancartierhogar.com.ar';
-  $mail->Password   = 'FaruSae0ujoh';
-  $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-  $mail->Port       = 465;
+  $mail->Username   = 'contacto.sistema.web@gmail.com';
+  $mail->Password   = 'vjny kghk cied xiru';
+  $mail->SMTPSecure = "tls";
+  $mail->Port       = 587;
 
-  $mail->SMTPOptions = [
-    'ssl' => [
-      'verify_peer'       => false,
-      'verify_peer_name'  => false,
-      'allow_self_signed' => true
-    ]
-  ];
-
-  $mail->setFrom('presupuesto@tiendajeancartierhogar.com.ar', 'Tienda Jean Cartier Hogar');
+  $mail->setFrom('contacto.sistema.web@gmail.com', 'Tienda Jean Cartier Hogar');
 
   // Enviar a la dirección de contacto y al cliente
-  //$mail->addAddress('marcos.kukuchka@gmail.com');
   $mail->addAddress('jeancartierhogarparana@gmail.com');
+  //$mail->addBcc('marcos.kukuchka@gmail.com');
 
 
   $mail->isHTML(true);
   $mail->Subject = 'Reserva Web - Presupuesto ' . $numero;
   $mail->Body    = $mensaje;
-  $mail->AltBody = 'Nueva reserva - Presupuesto ' . $numero . ' - Cliente: ' . $_SESSION['vendedor']['RazonSocial'];
+  $mail->AltBody = 'Nueva reserva - Presupuesto ' . $numero . ' - Cliente: ' . $_SESSION['vendedor']['RazonSocial'] . ' - N° Cliente: ' . $_SESSION['vendedor']['IdCliente'];
 
   $emailEnviado = $mail->send();
 } catch (Exception $e) {
